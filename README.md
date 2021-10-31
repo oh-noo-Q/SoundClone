@@ -1,2 +1,2 @@
 # SoundClone
-# just give "a commit" a shot
+## Website to listen to music and share music online
