@@ -22,13 +22,13 @@ button {
     
 }
 
-.frontHero__signin {
+.frontHero_signin {
     position: absolute;
     top: 23px;
     right: 30px;
 }
 
-.frontHero__signin button {
+.frontHero_signin button {
     padding: 7px 12px;
     margin-left: 5px;
     border: none;
@@ -41,7 +41,7 @@ button {
 
 }
 
-.frontContent__search {
+.frontContent_search {
     display: flex;
     margin-top: 50px;
     margin-bottom: 13px;
@@ -80,8 +80,42 @@ form.headerSearch {
     color: transparent;
 }
 
+.trendingTracks_title {
+    font-size: 24px;
+    text-align: center;
+    padding-top: 20px;
+    margin-bottom: 30px;
+}
+
+.trendingTracks_list ul {
+    list-style: none;
+}
+
 .front-sign-up-teaser {
 
+}
+
+.signupModule {
+    text-align: center;
+}
+
+.signupModule_title {
+    font-size: 36px;
+}
+
+.signupModule_afterTitle {
+    font-size: 24px;
+    margin-top: 7px;
+    margin-bottom: 10px;
+}
+
+.signupModule_createButton button {
+    padding: 10px 20px;
+    margin-left: 5px;
+    border: none;
+    font-size: 17px;
+    background: tomato;
+    color: white;
 }
 
 .front-footer {
