@@ -2,6 +2,7 @@ const audio = document.querySelector('.audio');
 const playBtn = document.querySelector('#play');
 const prevBtn = document.querySelector('#prev');
 const nextBtn = document.querySelector('#next');
+const repeatBtn = document.querySelector('.repeatControl');
 const volumeBtn = document.querySelector('.volume');
 
 const progress = document.querySelector('.progressBar');
@@ -47,6 +48,18 @@ fetch('test_audio/songs_info.json')
         // Change song events
         prevBtn.addEventListener('click', prevSong);
         nextBtn.addEventListener('click', nextSong);
+
+        repeatBtn.addEventListener('click', () => {
+            const isRepeat = repeatBtn.classList.contains('repeat-one');
+
+            if (isRepeat) {
+                repeatBtn.classList.remove('repeat-one');
+                audio.loop = false;
+            } else {
+                repeatBtn.classList.add('repeat-one');
+                audio.loop = true;
+            }
+        });
 
         volumeBtn.addEventListener('click', () => {
             const isMuted = musicContainer.classList.contains('mute');
@@ -132,7 +145,7 @@ function updateProgress(e) {
     progressContainer.setAttribute('aria-valuenow', parseInt(currentTime).toString());
     let minute = parseInt(currentTime / 60);
     let second = parseInt(currentTime % 60);
-    totalTimePassed.innerHTML = `${minute}:` +  (second < 10 ? '0':'') +`${second}`;
+    totalTimePassed.innerHTML = `${minute}:` + (second < 10 ? '0' : '') + `${second}`;
 }
 
 function setProgress(e) {
