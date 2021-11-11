@@ -8,7 +8,7 @@ dotenv.config();
 
 const authRegisterRouter = require('./src/routes/routes.auth.register');
 const authLoginRouter = require('./src/routes/routes.auth.login');
-const uploadRouter = require('./src/routes/routes.upload');
+const uploadRouter = require('./src/routes/routes.song.upload');
 
 const connectDB = async () => {
     try {
