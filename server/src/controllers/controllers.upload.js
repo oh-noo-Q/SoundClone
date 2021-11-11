@@ -23,7 +23,7 @@ controller.uploadControllers = async(req, res) => {
             title, 
             genre: genre || 'none', 
             urlAudio, 
-            user: '618b87d5e2204d9f9ae33e01',
+            user: req.userId,
         });
 
         await newSong.save();

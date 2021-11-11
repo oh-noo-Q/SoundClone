@@ -1,4 +1,5 @@
 const argon2 = require('argon2');
+const jwt = require('jsonwebtoken');
 const User = require('../models/users');
 
 const controller = {};
@@ -42,9 +43,12 @@ controller.loginControllers = async (req, res) => {
         }
 
         // all good
+        const accessToken = jwt.sign({ userId: user._id }, process.env.ACCESS_TOKEN_SECRET);
+
         res.json({
             success: true,
             message: 'Login successfully!',
+            accessToken,
         });
 
     } catch (err) {

@@ -1,4 +1,5 @@
 const argon2 = require('argon2');
+const jwt = require('jsonwebtoken');
 const User = require('../models/users');
 
 const controller = {};
@@ -39,12 +40,17 @@ controller.registerControllers = async (req, res) => {
         });
         await newUser.save();
 
+        // access token
+        const accessToken = jwt.sign({ userId: newUser._id }, process.env.ACCESS_TOKEN_SECRET);
+
+
         res.json({
             success: true,
             message: 'User created successfully!',
+            accessToken,
         });
 
-        // maybe access token here
+
     } catch (error) {
         console.log(err);
         res.status(500).json({
