@@ -4,9 +4,6 @@ const User = require('../models/users');
 
 const controller = {};
 
-// @route POST api/auth/login
-// @desc Login user
-// @access Public
 controller.loginControllers = async (req, res) => {
     const {username, password} = req.body;
 

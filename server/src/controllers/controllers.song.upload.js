@@ -2,9 +2,6 @@ const UploadSong = require('../models/songs');
 
 const controller = {};
 
-// @route POST api/upload
-// @desc Upload a song
-// @access Private
 controller.uploadControllers = async(req, res) => {
     const { title, genre, urlAudio } = req.body;
 

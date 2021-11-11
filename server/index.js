@@ -9,6 +9,8 @@ dotenv.config();
 const authRegisterRouter = require('./src/routes/routes.auth.register');
 const authLoginRouter = require('./src/routes/routes.auth.login');
 const uploadRouter = require('./src/routes/routes.song.upload');
+const updateRouter = require('./src/routes/routes.song.update');
+const deleteRouter = require('./src/routes/routes.song.delete');
 
 const connectDB = async () => {
     try {
@@ -49,7 +51,9 @@ app.use(express.json());
 
 app.use('/api/auth/register', authRegisterRouter);
 app.use('/api/auth/login', authLoginRouter);
-app.use('/api/upload', uploadRouter);
+app.use('/api/song/upload', uploadRouter);
+app.use('/api/song/update', updateRouter);
+app.use('/api/song/delete', deleteRouter);
 
 app.listen(port, () => {
     console.log(`Server is running on port: ${port}`);
