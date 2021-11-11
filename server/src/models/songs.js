@@ -10,8 +10,7 @@ const songSchema = new schema({
         type: String,
     },
     views: {
-        type: Int32Array,
-        required: true,
+        type: Number,
     },
     urlAudio: {
         type: String,
