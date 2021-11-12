@@ -6,6 +6,7 @@ const morgan = require('morgan');
 const dotenv = require('dotenv');
 dotenv.config();
 
+const searchRouter = require('./src/routes/routes.song.search');
 const authRegisterRouter = require('./src/routes/routes.auth.register');
 const authLoginRouter = require('./src/routes/routes.auth.login');
 const authUpdateRouter = require('./src/routes/routes.auth.update');
@@ -50,6 +51,7 @@ app.use(morgan('tiny'));
 app.use(cors());
 app.use(express.json());
 
+app.use('/api/song/search', searchRouter);
 app.use('/api/auth/register', authRegisterRouter);
 app.use('/api/auth/login', authLoginRouter);
 app.use('/api/auth/update', authUpdateRouter);
