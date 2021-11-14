@@ -1,3 +1,4 @@
+
 const express = require('express');
 const helmet = require('helmet');
 const mongoose = require('mongoose');
@@ -6,14 +7,9 @@ const morgan = require('morgan');
 const dotenv = require('dotenv');
 dotenv.config();
 
-const authRegisterRouter = require('./src/routes/routes.auth.register');
-const authUpdateRouter = require('./src/routes/routes.auth.update');
-
-const searchRouter = require('./src/routes/routes.song.search');
-const uploadRouter = require('./src/routes/routes.song.upload');
-const updateRouter = require('./src/routes/routes.song.update');
-const deleteRouter = require('./src/routes/routes.song.delete');
-
+const authLoginRouter = require('./src/routes/routes.auth.login');
+const authTokenRouter = require('./src/routes/routes.auth.token');
+const authLogoutRouter = require('./src/routes/routes.auth.logout');
 
 const connectDB = async () => {
     try {
@@ -33,7 +29,7 @@ const connectDB = async () => {
 connectDB();
 
 
-const port = process.env.PORT;
+const port = process.env.PORT_AUTH || 4444;
 const isProduction = process.env.NODE_ENV === 'production';
 const app = express();
 
@@ -54,13 +50,9 @@ app.use(cors());
 app.use(express.json());
 
 
-app.use('/api/auth/register', authRegisterRouter);
-app.use('/api/auth/update', authUpdateRouter);
-
-app.use('/api/song/search', searchRouter);
-app.use('/api/song/upload', uploadRouter);
-app.use('/api/song/update', updateRouter);
-app.use('/api/song/delete', deleteRouter);
+app.use('/api/auth/login', authLoginRouter);
+app.use('/api/auth/token', authTokenRouter);
+app.use('/api/auth/logout', authLogoutRouter);
 
 
 app.listen(port, () => {
