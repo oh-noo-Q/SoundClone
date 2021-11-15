@@ -9,6 +9,7 @@ dotenv.config();
 const authRegisterRouter = require('./src/routes/routes.auth.register');
 const authUpdateRouter = require('./src/routes/routes.auth.update');
 
+const getDefaultRouter =require('./src/routes/routes.song.getDefault');
 const searchRouter = require('./src/routes/routes.song.search');
 const uploadRouter = require('./src/routes/routes.song.upload');
 const updateRouter = require('./src/routes/routes.song.update');
@@ -57,6 +58,7 @@ app.use(express.json());
 app.use('/api/auth/register', authRegisterRouter);
 app.use('/api/auth/update', authUpdateRouter);
 
+app.use('/api/song/getDefault', getDefaultRouter);
 app.use('/api/song/search', searchRouter);
 app.use('/api/song/upload', uploadRouter);
 app.use('/api/song/update', updateRouter);
