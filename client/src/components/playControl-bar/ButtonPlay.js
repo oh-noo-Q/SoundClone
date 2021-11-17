@@ -1,8 +1,8 @@
 import PropTypes from 'prop-types';
 
-const ButtonPlay = ({ onClick }) => {
+const ButtonPlay = ({ onClick, playing }) => {
     return (
-        <button onClick={onClick} id='play' className='action-btn pause'></button>
+        <button onClick={onClick} id='play' className={`action-btn pause ${playing}`}></button>
     )
 }
 

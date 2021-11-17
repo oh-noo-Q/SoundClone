@@ -20,6 +20,8 @@ let songsAudio = [];
 let songsSinger = [];
 let songIndex;
 
+let dataSong = [];
+
 fetch('test_audio/songs_info.json')
     .then((res) => res.json())
     .then((data) => {
@@ -27,12 +29,16 @@ fetch('test_audio/songs_info.json')
             songsSinger.push(song.singer);
             songsTitle.push(song.title);
             songsAudio.push(song.audio);
+
+            dataSong.push(song);
         });
 
         songIndex = 0;
 
         // load songs
-        loadSong(songsSinger[songIndex], songsTitle[songIndex], songsAudio[songIndex]);
+        // loadSong(songsSinger[songIndex], songsTitle[songIndex], songsAudio[songIndex]);
+        loadSong(dataSong[songIndex].singer, dataSong[songIndex].title, dataSong[songIndex].audio);
+
 
         // Event listener
         playBtn.addEventListener('click', () => {
