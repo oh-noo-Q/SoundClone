@@ -9,13 +9,13 @@ import ButtonVolume from './ButtonVolume';
 import Timeline from './Timeline';
 
 
-const PlayControlBar = ({ defaultSongs }) => {
+const PlayControlBar = ({ dataSongsToPlay }) => {
     // const [duration, setDuration] = useState();
     // const [showPlayBar, setShowPlayBar] = useState(false);
     // const [playing, setPlaying] = useState(false);
 
     // let [songIndex, setSongIndex] = useState(0);
-    // let [audio] = useState(new Audio(defaultSongs[songIndex].urlAudio));
+    // let [audio] = useState(new Audio(dataSongsToPlay[songIndex].urlAudio));
 
     // useEffect(() => {
     //     playing ? audio.play() : audio.pause();
@@ -28,11 +28,11 @@ const PlayControlBar = ({ defaultSongs }) => {
     let showPlayBar = false;
     let playing = false;
     let songIndex = 0;
-    let audio = new Audio(defaultSongs[songIndex].urlAudio);
+    let audio = new Audio(dataSongsToPlay[songIndex].urlAudio);
 
     const loadSong = () => {
-        document.getElementById('user-song').innerHTML = defaultSongs[songIndex].user.fullname;
-        document.getElementById('title-song').innerHTML = defaultSongs[songIndex].title;
+        document.getElementById('user-song').innerHTML = dataSongsToPlay[songIndex].user.fullname;
+        document.getElementById('title-song').innerHTML = dataSongsToPlay[songIndex].title;
         // audio.addEventListener("loadedmetadata", () => {
         //     setDuration(audio.duration);
         // });
@@ -41,23 +41,23 @@ const PlayControlBar = ({ defaultSongs }) => {
     const prevSong = () => {
         songIndex--;
         if (songIndex < 0) {
-            songIndex = defaultSongs.length - 1;
+            songIndex = dataSongsToPlay.length - 1;
         }
 
         console.log(songIndex);
         loadSong();
-        audio.src = defaultSongs[songIndex].urlAudio;
+        audio.src = dataSongsToPlay[songIndex].urlAudio;
         audio.play();
         playing = true;
     }
 
     const nextSong = () => {
         songIndex++;
-        if (songIndex > defaultSongs.length - 1) {
+        if (songIndex > dataSongsToPlay.length - 1) {
             songIndex = 0;
         }
         loadSong();
-        audio.src = defaultSongs[songIndex].urlAudio;
+        audio.src = dataSongsToPlay[songIndex].urlAudio;
         audio.play();
         playing = true;
     }

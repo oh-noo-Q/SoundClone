@@ -5,6 +5,7 @@ const controller = {};
 controller.searchControllers = async (req, res) => {
     // titleSearch is regex
     const { titleSearch } = req.body;
+    console.log(titleSearch);
 
     if (!titleSearch) {
         return res.status(400).json({ success: false, message: 'please enter something -_-' });

@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import Button from "./Button";
 
 const Header = ({ background }) => {
@@ -7,8 +8,12 @@ const Header = ({ background }) => {
                 <img src={background} alt='Background SoundClone' className='img-background' />
             </div>
             <div className='header-signin'>
-                <Button text='Sign in' />
-                <Button text='Create account' />
+                <Link to='/login'>
+                    <Button text='Sign in' />
+                </Link>
+                <Link to='register'>
+                    <Button text='Create account' />
+                </Link>
             </div>
         </div>
     )

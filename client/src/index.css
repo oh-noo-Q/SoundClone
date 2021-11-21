@@ -22,6 +22,12 @@ a {
 
 h5 {
   margin: 0;
+  color: #333;
+  font-size: small;
+}
+
+h4, h2, p {
+  text-align: center;
 }
 
 .container-content {
@@ -30,6 +36,7 @@ h5 {
   overflow: auto;
   margin-left: auto;
   margin-right: auto;
+  color: #333;
 }
 
 .header {
@@ -94,9 +101,13 @@ h5 {
   margin-bottom: 30px;
 }
 
-.button-default-songs {
+.button-default-songs, .searchDashboard {
   text-align: center;
   margin-bottom: 40px;
+}
+
+.searchDashboard {
+  margin-top: 40px;
 }
 
 .signup-teaser {
@@ -327,4 +338,113 @@ footer {
 
 #user-song {
   color: rgb(77, 77, 77);
+}
+
+.about-us {
+  padding-top: 80px;
+  padding-bottom: 190px;
+}
+
+.about-us p {
+  line-height: 30px;
+}
+
+.about-us h2 {
+  margin-bottom: 30px;
+}
+
+.about-us div {
+  display: flex;
+  margin-top: 40px;
+}
+
+.about-us div img {
+  margin-left: auto;
+  margin-right: auto;
+  width: 15%;
+}
+
+.header-others {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  height: 55px;
+  background-color: #333;
+}
+
+.header-others-container {
+  height: 100%;
+  width: 75%;
+  display: flex;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.header-others-container div {
+  margin-left: auto;
+  margin-right: auto;
+  display: flex;
+}
+
+.header-others-img {
+  height: 100%;
+}
+
+.header-others-img img {
+  height: 100%;
+}
+
+.header-others-link-to-home {
+  margin-left: auto;
+  margin-right: auto;
+  background-color: tomato;
+  width: 200px;
+  display: flex;
+}
+
+.header-others-link-to-home div {
+  margin: auto;
+}
+
+.header-others-link-to-home a {
+  color: #f2f2f2;
+}
+
+.displaySongsSearch {
+  text-align: left;
+  margin-bottom: 40px;
+}
+
+.listSongsSearch {
+  margin-left: auto;
+  margin-right: auto;
+  width: 45%;
+  font-size: large;
+}
+
+.authDisplay {
+  margin-top: 150px;
+}
+
+.authContainer {
+  width: 30%;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.authForm {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin-bottom: 30px;
+}
+.auth-img {
+  margin-top: 50px;
+  width: 40%;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.auth-img img {
+  width: 100%;
 }

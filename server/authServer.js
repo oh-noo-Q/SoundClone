@@ -10,6 +10,7 @@ dotenv.config();
 const authLoginRouter = require('./src/routes/routes.auth.login');
 const authTokenRouter = require('./src/routes/routes.auth.token');
 const authLogoutRouter = require('./src/routes/routes.auth.logout');
+const authRouter = require('./src/routes/routes.auth');
 
 const connectDB = async () => {
     try {
@@ -53,6 +54,7 @@ app.use(express.json());
 app.use('/api/auth/login', authLoginRouter);
 app.use('/api/auth/token', authTokenRouter);
 app.use('/api/auth/logout', authLogoutRouter);
+app.use('api/auth', authRouter);
 
 
 app.listen(port, () => {

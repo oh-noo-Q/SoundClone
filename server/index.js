@@ -11,6 +11,7 @@ const authUpdateRouter = require('./src/routes/routes.auth.update');
 
 const getDefaultRouter =require('./src/routes/routes.song.getDefault');
 const searchRouter = require('./src/routes/routes.song.search');
+const upfirebaseRouter = require('./src/routes/routes.song.upfirebase');
 const uploadRouter = require('./src/routes/routes.song.upload');
 const updateRouter = require('./src/routes/routes.song.update');
 const deleteRouter = require('./src/routes/routes.song.delete');
@@ -60,6 +61,7 @@ app.use('/api/auth/update', authUpdateRouter);
 
 app.use('/api/song/getDefault', getDefaultRouter);
 app.use('/api/song/search', searchRouter);
+app.use('/api/song/upfirebase', upfirebaseRouter);
 app.use('/api/song/upload', uploadRouter);
 app.use('/api/song/update', updateRouter);
 app.use('/api/song/delete', deleteRouter);

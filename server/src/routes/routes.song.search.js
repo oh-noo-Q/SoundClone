@@ -3,9 +3,9 @@ const router = express.Router();
 
 const { searchControllers } = require('../controllers/controllers.song.search');
 
-// @route GET /api/song/search
+// @route POST /api/song/search
 // @desc Search songs
 // @access Public
-router.get('/', searchControllers);
+router.post('/', searchControllers);
 
 module.exports = router;
