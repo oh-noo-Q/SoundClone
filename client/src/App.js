@@ -1,5 +1,5 @@
 import './App.css';
-import { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router';
 import { BrowserRouter as Router, Route, Switch, Routes, Link } from 'react-router-dom';
 import axios from 'axios';
@@ -24,6 +24,7 @@ import LoginForm from './components/auth/LoginForm';
 import RegisterForm from './components/auth/RegisterForm';
 import AuthContextProvider from './contexts/AuthContext';
 import Discovery from './components/auth/Discovery';
+import ProtectedRoute from './components/ProtectedRoute';
 
 
 const App = () => {
@@ -95,56 +96,60 @@ const App = () => {
   }
 
   return (
-    <Router>
-      <div className='container-content'>
-        <Routes>
-          <Route exact path='/' element={<div>
-            <Header background={background} />
+    <AuthContextProvider>
 
-            <div className='content-search'>
-              <span>
-                <form className='search-bar' onSubmit={search}>
-                  <input className='search-input' type='search' placeholder='Search for tracks' value={titleSearch} onChange={onChangeSearchForm} />
-                  <button className='search-submit' type='submit' onClick={() => console.log('')} ></button>
-                </form>
-              </span>
-            </div>
+      <Router>
+        <div className='container-content'>
+          <Routes>
+            <Route exact path='/' element={<div>
+              <Header background={background} />
 
-            {searchDataSongs.length > 0 ? <div className='searchDashboard'>
-              <DashboardSearch searchDataSongs={searchDataSongs} />
-              <Button text='Play List Search' onClick={() => setDataSongsToPlay(searchDataSongs)} />
-            </div> : <div></div>}
+              <div className='content-search'>
+                <span>
+                  <form className='search-bar' onSubmit={search}>
+                    <input className='search-input' type='search' placeholder='Search for tracks' value={titleSearch} onChange={onChangeSearchForm} />
+                    <button className='search-submit' type='submit' onClick={() => console.log('')} ></button>
+                  </form>
+                </span>
+              </div>
 
-            <Content onPlayDefaultSongs={() => getDefaultSongs()} />
-            <SighupTeaser />
-            <Footer />
-          </div>} />
+              {searchDataSongs.length > 0 ? <div className='searchDashboard'>
+                <DashboardSearch searchDataSongs={searchDataSongs} />
+                <Button text='Play List Search' onClick={() => setDataSongsToPlay(searchDataSongs)} />
+              </div> : <div></div>}
 
-          <Route path='/about' element={<AboutUs aboutUsImg={aboutUsImg} />} />
-        </Routes>
-      </div>
+              <Content onPlayDefaultSongs={() => getDefaultSongs()} />
+              <SighupTeaser />
+              <Footer />
+            </div>} />
 
-      <AuthContextProvider>
+            <Route path='/about' element={<AboutUs aboutUsImg={aboutUsImg} />} />
+          </Routes>
+        </div>
+
         <Routes>
           <Route exact path='/login' element={<LoginForm authImg={aboutUsImg} />} />
           <Route exact path='/register' element={<RegisterForm authImg={aboutUsImg} />} />
-          <Route exact path='/discovery' element={<Discovery />} />
+
+          <Route exact path='/discovery' element={<ProtectedRoute Component={Discovery} />} />
         </Routes>
-      </AuthContextProvider>
 
-      <Routes>
-        <Route path='/:somestring' element={<HeaderOthers littleLogo={aboutUsImg} />} />
-      </Routes>
+        <Routes>
+          <Route path='/:somestring' element={<HeaderOthers littleLogo={aboutUsImg} />} />
+        </Routes>
 
-      {dataSongsToPlay.length > 0 ? <div className='playControl-bar'>
-        <section className='playControl-inner'>
-          <div className='playControl-container'>
-            <PlayControlBar dataSongsToPlay={dataSongsToPlay} />
-          </div>
-        </section>
-      </div> : <div></div>}
+        {dataSongsToPlay.length > 0 ? <div className='playControl-bar'>
+          <section className='playControl-inner'>
+            <div className='playControl-container'>
+              <PlayControlBar dataSongsToPlay={dataSongsToPlay} />
+            </div>
+          </section>
+        </div> : <div></div>}
 
-    </Router>
+      </Router>
+
+    </AuthContextProvider>
+
   );
 }
 

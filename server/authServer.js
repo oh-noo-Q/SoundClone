@@ -54,7 +54,7 @@ app.use(express.json());
 app.use('/api/auth/login', authLoginRouter);
 app.use('/api/auth/token', authTokenRouter);
 app.use('/api/auth/logout', authLogoutRouter);
-app.use('api/auth', authRouter);
+app.use('/api/auth', authRouter);
 
 
 app.listen(port, () => {

@@ -1,3 +1,4 @@
+import React from 'react';
 
 const Timeline = ({ timePassed, duration }) => {
     let minutePass = parseInt(timePassed / 60);

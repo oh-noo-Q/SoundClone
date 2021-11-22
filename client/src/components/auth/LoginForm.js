@@ -1,9 +1,10 @@
+import React from 'react';
 import { useContext, useState } from 'react';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import { Link, useNavigate, Navigate } from 'react-router-dom';
 import { AuthContext } from '../../contexts/AuthContext';
-import Spinner from 'react-bootstrap/Spinner'
+import Spinner from 'react-bootstrap/esm/Spinner';
 
 const LoginForm = ({ authImg }) => {
 
@@ -19,16 +20,28 @@ const LoginForm = ({ authImg }) => {
         password: ''
     });
 
+    // alert if login failed
+    const [alertLoginFailed, setAlertLoginFailed] = useState((
+        <div></div>
+    ))
+
     const { username, password } = loginForm;
 
     const onChangeLoginForm = event => setLoginForm({ ...loginForm, [event.target.name]: event.target.value })
+
 
     const login = async event => {
         event.preventDefault();
         try {
             const loginData = await loginUser(loginForm);
             if (loginData.success) {
+                setAlertLoginFailed((<div></div>))
                 navigate('/discovery');
+            } else {
+                setAlertLoginFailed((
+                    <div className='alert-login'>Login failed: Wrong username or password</div>
+                ));
+                setTimeout(() => setAlertLoginFailed((<div></div>)), 5000);
             }
 
         } catch (err) {
@@ -36,20 +49,19 @@ const LoginForm = ({ authImg }) => {
         }
     }
 
-    const {authState: { authLoading, isAuthenticated }} = useContext(AuthContext);
+    const { authState } = useContext(AuthContext);
 
-    let loadingIcon = (<div></div>)
-
-    if (authLoading) {
-        loadingIcon = (
+    if (authState.authLoading) {
+        return (
             <div className='d-flex justify-content-center mt-2'>
                 <Spinner animation='border' variant='info' />
             </div>
         )
-    } else if (isAuthenticated) {
-        return <Navigate to='discovery' />
-    } 
-
+    } else if (authState.isAuthenticated) {
+        return <Navigate to='/discovery' />
+    } else {
+        console.log(authState);
+    }
 
     return (
         <div className='authDisplay'>
@@ -67,6 +79,8 @@ const LoginForm = ({ authImg }) => {
                         <Button variant='success' type='submit' >Login</Button>
                     </Form>
 
+                    {alertLoginFailed}
+
                     <p>Don't have an account?
                         <Link to='/register'>
                             <Button variant='info' size='sm' className='ml-2' >Register</Button>
@@ -77,7 +91,6 @@ const LoginForm = ({ authImg }) => {
                         <img src={authImg} alt='sound-clone logo' />
                     </div>
 
-                    {loadingIcon}
                 </div>
             </div>
         </div>

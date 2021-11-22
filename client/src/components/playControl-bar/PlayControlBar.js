@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 
 import ButtonPrev from './ButtonPrev';
 import ButtonPlay from './ButtonPlay';
