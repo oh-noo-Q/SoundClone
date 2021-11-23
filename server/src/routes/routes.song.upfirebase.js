@@ -13,8 +13,6 @@ const upload = multer({
 // @desc Upload audio files to Firebase Storage
 // @access Private
 router.post('/', verifyToken, upload.single('song'), (req, res) => {
-    console.log(req.file.originalname);
-
     if (!req.file) {
         return res
             .status(400)
@@ -40,6 +38,7 @@ router.post('/', verifyToken, upload.single('song'), (req, res) => {
         blobWriter.on("finish", () => {
             let publicUrl = `https://firebasestorage.googleapis.com/v0/b/${firebase.bucket.name}/o/${encodeURIComponent(blob.name)}?alt=media`;
             res.status(200).json({
+                success: true,
                 message: "File uploaded!",
                 url: publicUrl,
             });

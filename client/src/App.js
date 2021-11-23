@@ -124,13 +124,15 @@ const App = () => {
 
             <Route path='/about' element={<AboutUs aboutUsImg={aboutUsImg} />} />
           </Routes>
+
+          <Routes>
+            <Route exact path='/discovery' element={<ProtectedRoute Component={Discovery} />} />
+          </Routes>
         </div>
 
         <Routes>
           <Route exact path='/login' element={<LoginForm authImg={aboutUsImg} />} />
           <Route exact path='/register' element={<RegisterForm authImg={aboutUsImg} />} />
-
-          <Route exact path='/discovery' element={<ProtectedRoute Component={Discovery} />} />
         </Routes>
 
         <Routes>

@@ -9,7 +9,7 @@ const HeaderOthers = ({ littleLogo }) => {
     const { logoutUser } = useContext(AuthContext);
 
     const navigate = useNavigate();
-    
+
     const logout = async () => {
         try {
             const logoutData = await logoutUser();

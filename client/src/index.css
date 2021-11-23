@@ -475,3 +475,41 @@ footer {
   text-align: center;
   color: red;
 }
+
+.container-discover {
+  width: 100%;
+}
+
+.discover-header-user {
+  height: 320px;
+  background-color: rgb(129, 127, 127);
+  margin-bottom: 50px;
+}
+
+.discover-content {
+  margin-bottom: 50px;
+  text-align: center;
+}
+
+.upload-songs-form {
+  width: 50%;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.upload-songs-title {
+  font-size: xx-large;
+  color: tomato;
+}
+
+.upload-success {
+  margin-top: 20px;
+  text-align: center;
+  color: green;
+}
+
+.upload-fail {
+  margin-top: 20px;
+  text-align: center;
+  color: red;
+}

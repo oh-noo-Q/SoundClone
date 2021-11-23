@@ -59,7 +59,6 @@ const AuthContextProvider = ({ children }) => {
             }
             await loadUser();
 
-            console.log(authState);
             return response.data;
         } catch (err) {
             if (err.response.data) {
@@ -81,7 +80,6 @@ const AuthContextProvider = ({ children }) => {
             }
             await loadUser();
 
-            console.log(response.data);
             return response.data;
 
         } catch (err) {
@@ -113,7 +111,78 @@ const AuthContextProvider = ({ children }) => {
 
             console.log(authState);
             return response.data;
-            
+
+        } catch (err) {
+            if (err.response.data) {
+                return err.response.data;
+            }
+            return {
+                success: false,
+                message: err.message,
+            }
+        }
+    }
+
+    const upFirebase = async (type, uploadForm) => {
+        const formData = new FormData();
+        formData.append(type, uploadForm);
+
+        try {
+            const response = await axios({
+                method: 'post',
+                url: `${apiUrl}/song/upfirebase`,
+                data: formData,
+                headers: { 'Content-Type': 'multipart/form-data' }
+            });
+
+            return response.data;
+
+        } catch (err) {
+            if (err.response.data) {
+                return err.response.data;
+            }
+            return {
+                success: false,
+                message: err.message,
+            }
+        }
+    }
+
+    const upMongo = async uploadForm => {
+        try {
+            const response = await axios.post(`${apiUrl}/song/upload`, uploadForm);
+            if (response.data.success) {
+                console.log(response.data);
+                return response.data;
+            }
+        } catch (err) {
+            if (err.response.data) {
+                return err.response.data;
+            }
+            return {
+                success: false,
+                message: err.message,
+            }
+        }
+    }
+
+    const uploadSongs = async uploadForm => {
+        try {
+            const firebaseData = await upFirebase('song', uploadForm.song);
+            if (firebaseData.success) {
+                const uploadMongo = {
+                    title: uploadForm.title,
+                    genre: uploadForm.genre,
+                    urlAudio: firebaseData.url,
+                }
+
+                const mongoData = await upMongo(uploadMongo);
+                if (mongoData.success) {
+                    console.log(mongoData);
+                    return mongoData;
+                }
+            }
+
         } catch (err) {
             if (err.response.data) {
                 return err.response.data;
@@ -126,7 +195,7 @@ const AuthContextProvider = ({ children }) => {
     }
 
     // context data
-    const authContextData = { loginUser, registerUser, logoutUser, authState };
+    const authContextData = { loginUser, registerUser, logoutUser, uploadSongs, authState };
 
     // return provider
     return (

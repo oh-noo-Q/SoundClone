@@ -35,8 +35,6 @@ const RegisterForm = ({ authImg }) => {
     const register = async event => {
         event.preventDefault();
 
-        console.log('dong 38');
-
         if (password !== confirmPassword) {
             setAlertRegisterFailed((
                 <div className='alert-login'>Register failed: Password and confirm password are different</div>
