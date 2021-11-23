@@ -19,7 +19,7 @@ import AboutUs from './components/AboutUs';
 
 import PlayControlBar from './components/playControl-bar/PlayControlBar';
 
-import { apiUrl, apiUrlAuth } from './contexts/Constants';
+import { apiUrl, apiUrlAuth, LOCAL_STORAGE_TOKEN_NAME } from './contexts/Constants';
 import LoginForm from './components/auth/LoginForm';
 import RegisterForm from './components/auth/RegisterForm';
 import AuthContextProvider from './contexts/AuthContext';
@@ -97,7 +97,6 @@ const App = () => {
 
   return (
     <AuthContextProvider>
-
       <Router>
         <div className='container-content'>
           <Routes>
@@ -108,7 +107,7 @@ const App = () => {
                 <span>
                   <form className='search-bar' onSubmit={search}>
                     <input className='search-input' type='search' placeholder='Search for tracks' value={titleSearch} onChange={onChangeSearchForm} />
-                    <button className='search-submit' type='submit' onClick={() => console.log('')} ></button>
+                    <button className='search-submit' type='submit' ></button>
                   </form>
                 </span>
               </div>

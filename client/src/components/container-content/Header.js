@@ -1,8 +1,13 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, Navigate } from 'react-router-dom';
+import { LOCAL_STORAGE_TOKEN_NAME } from '../../contexts/Constants';
 import Button from "./Button";
 
 const Header = ({ background }) => {
+    if (localStorage[LOCAL_STORAGE_TOKEN_NAME]) {
+        return <Navigate to='/discovery' />
+    }
+
     return (
         <div className='header'>
             <div className='header-img'>
@@ -12,7 +17,7 @@ const Header = ({ background }) => {
                 <Link to='/login'>
                     <Button text='Sign in' />
                 </Link>
-                <Link to='register'>
+                <Link to='/register'>
                     <Button text='Create account' />
                 </Link>
             </div>

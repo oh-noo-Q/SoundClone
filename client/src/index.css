@@ -410,6 +410,27 @@ footer {
   color: #f2f2f2;
 }
 
+.header-others-search {
+  display: flex;
+  align-items: center;
+  padding-left: 10px;
+}
+
+.header-others-search-input {
+  background: #f2f2f2;
+  padding: 0 16px;
+  height: 40px;
+  width: 100%;
+  border: 2px solid;
+  border-radius: 10px;
+  outline: 0;
+  font-size: 15px;
+}
+
+.header-others-button {
+  padding-left: 50px;
+}
+
 .displaySongsSearch {
   text-align: left;
   margin-bottom: 40px;

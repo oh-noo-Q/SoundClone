@@ -35,6 +35,7 @@ const AuthContextProvider = ({ children }) => {
                 console.log(response);
             }
         } catch (err) {
+            console.log('dang o catch load user');
             localStorage.removeItem(LOCAL_STORAGE_TOKEN_NAME);
             setAuthToken(null);
             dispatch({
@@ -58,7 +59,7 @@ const AuthContextProvider = ({ children }) => {
             }
             await loadUser();
 
-            console.log(response.data);
+            console.log(authState);
             return response.data;
         } catch (err) {
             if (err.response.data) {
@@ -94,8 +95,38 @@ const AuthContextProvider = ({ children }) => {
         }
     }
 
+    // logout
+    const logoutUser = async () => {
+        try {
+            const response = await axios.delete(`${apiUrlAuth}/auth/logout`);
+            if (response.data.success) {
+                console.log(response.data);
+                localStorage.removeItem(LOCAL_STORAGE_TOKEN_NAME);
+            }
+            dispatch({
+                type: 'SET_AUTH',
+                payload: {
+                    isAuthenticated: false,
+                    user: null,
+                }
+            });
+
+            console.log(authState);
+            return response.data;
+            
+        } catch (err) {
+            if (err.response.data) {
+                return err.response.data;
+            }
+            return {
+                success: false,
+                message: err.message,
+            }
+        }
+    }
+
     // context data
-    const authContextData = { loginUser, registerUser, authState };
+    const authContextData = { loginUser, registerUser, logoutUser, authState };
 
     // return provider
     return (
