@@ -5,6 +5,7 @@ import Form from 'react-bootstrap/Form';
 import { Link, useNavigate, Navigate } from 'react-router-dom';
 import { AuthContext } from '../../contexts/AuthContext';
 import Spinner from 'react-bootstrap/esm/Spinner';
+import { LOCAL_STORAGE_FULLNAM } from '../../contexts/Constants';
 
 const RegisterForm = ({ authImg }) => {
 
@@ -46,6 +47,7 @@ const RegisterForm = ({ authImg }) => {
         try {
             const registerData = await registerUser(registerForm);
             if (registerData.success) {
+                localStorage.setItem(LOCAL_STORAGE_FULLNAM, fullname);
                 setAlertRegisterFailed((<div></div>))
                 navigate('/discovery');
             } else {
@@ -116,4 +118,4 @@ const RegisterForm = ({ authImg }) => {
     )
 }
 
-export default RegisterForm
+export default RegisterForm;

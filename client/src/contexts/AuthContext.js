@@ -1,7 +1,8 @@
 import React, { createContext, useReducer, useEffect, useState } from "react";
 import axios from "axios";
-import { authReducer } from "../reducers/authReducer";
+import { authReducer } from "../redux/reducers/authReducer";
 import { apiUrl, apiUrlAuth, LOCAL_STORAGE_TOKEN_NAME } from "./Constants";
+import { GLOBALTYPES } from "../redux/reducers/globalTypes";
 
 import setAuthToken from "../components/auth/setAuthToken";
 
@@ -24,7 +25,7 @@ const AuthContextProvider = ({ children }) => {
             const response = await axios.get(`${apiUrlAuth}/auth`);
             if (response.data.success) {
                 dispatch({
-                    type: 'SET_AUTH',
+                    type: GLOBALTYPES.SET_AUTH,
                     payload: {
                         isAuthenticated: true,
                         user: response.data.user,

@@ -2,9 +2,9 @@ import React from 'react';
 
 import PropTypes from 'prop-types';
 
-const ButtonVolume = ({ onClick }) => {
+const ButtonVolume = ({ onClick, muted }) => {
     return (
-        <button onClick={onClick} id='volume' className='action-btn'></button>
+        <button onClick={onClick} id='volume' className={`action-btn ${muted}`}></button>
     )
 }
 
