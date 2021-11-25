@@ -9,7 +9,7 @@ controller.loginControllers = async (req, res) => {
 
     if (!username || !password) {
         return res
-            .status(400)
+            .status(401)
             .json({
                 success: false,
                 message: 'Missing username and/or password!',
@@ -18,11 +18,11 @@ controller.loginControllers = async (req, res) => {
 
     try {
         // checking for existing username
-        const user = await User.findOne({ username });
+        let user = await User.findOne({ username });
 
         if (!user) {
             return res
-                .status(400)
+                .status(401)
                 .json({
                     success: false,
                     message: 'Incorrect username or password',
@@ -32,7 +32,7 @@ controller.loginControllers = async (req, res) => {
         const checkPassword = await argon2.verify(user.password, password);
         if (!checkPassword) {
             return res
-                .status(400)
+                .status(401)
                 .json({
                     success: false,
                     message: 'Incorrect username or password',
@@ -40,12 +40,25 @@ controller.loginControllers = async (req, res) => {
         }
 
         // all good
-        const accessToken = jwt.sign({ userId: user._id }, process.env.ACCESS_TOKEN_SECRET);
+        // Access Token
+        const accessToken = jwt.sign({ userId: user._id }, process.env.ACCESS_TOKEN_SECRET, {
+            expiresIn: '12h',
+        });
+
+        // Refresh Token
+        const refreshToken = jwt.sign({ userId: user._id }, process.env.REFRESH_TOKEN_SECRET, {
+            expiresIn: '1000h',
+        }); 
+
+        // update refresh token into database
+        user.refreshToken = refreshToken;
+        await user.save();
 
         res.json({
             success: true,
             message: 'Login successfully!',
             accessToken,
+            refreshToken,
         });
 
     } catch (err) {
