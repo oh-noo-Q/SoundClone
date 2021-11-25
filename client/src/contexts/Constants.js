@@ -3,3 +3,4 @@ export const apiUrlAuth = process.env.NODE_ENV === 'production' ? 'something els
 
 export const LOCAL_STORAGE_TOKEN_NAME = 'sound-clone';
 export const LOCAL_STORAGE_FULLNAM = 'fullname-user';
+export const LOCAL_STORAGE_USERNAME = 'username';

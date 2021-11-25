@@ -1,7 +1,9 @@
 import React, { useContext } from 'react';
+import { useDispatch } from 'react-redux';
 import { Link, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../contexts/AuthContext';
 import { LOCAL_STORAGE_TOKEN_NAME } from '../contexts/Constants';
+import { removeUserSongs } from '../redux/reducers/userSongsReducer';
 import Button from './container-content/Button';
 import SearchHeader from './container-content/SearchHeader';
 
@@ -11,10 +13,16 @@ const HeaderOthers = ({ littleLogo }) => {
 
     const navigate = useNavigate();
 
+    // redux
+    const dispatch = useDispatch();
+
     const logout = async () => {
         try {
             const logoutData = await logoutUser();
             if (logoutData.success) {
+                // redux
+                dispatch(removeUserSongs());
+
                 navigate('/login');
                 console.log('logout done');
             }
@@ -65,18 +73,9 @@ const HeaderOthers = ({ littleLogo }) => {
                             <Link to='/'>SOUNDCLONE</Link>
                         </div>
                     </div>
-                    <div className='header-others-search'>
-                        <span>
-                            {/* <form className='search-bar' onSubmit={search}>
-                                    <input className='search-input' type='search' placeholder='Search for tracks' value={titleSearch} onChange={onChangeSearchForm} />
-                                    <button className='search-submit' type='submit' ></button>
-                                </form> */}
-                            <form className='search-bar' >
-                                <input className='header-others-search-input' type='search' placeholder='Search for tracks' />
-                                <button className='search-submit' type='submit' ></button>
-                            </form>
-                        </span>
-                    </div>
+                    
+                    <SearchHeader />
+
                     <div className='header-others-button'>
                         <Button text='Log out' onClick={logout} />
                     </div>

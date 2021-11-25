@@ -2,14 +2,17 @@ import React, { useState, useContext } from 'react';
 import Footer from '../container-content/Footer';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
+import { useDispatch, useSelector } from 'react-redux';
+
 import { AuthContext } from '../../contexts/AuthContext';
 import avatarGeneral from '../../assets/SoundcloneLogo.png';
 import { LOCAL_STORAGE_FULLNAM } from '../../contexts/Constants';
-import PlayBarVersion2 from '../playControl-bar/PlayBarVersion2';
+import { changeUserSongs, userSongsSelector } from '../../redux/reducers/userSongsReducer';
+import { changeDataSongs } from '../../redux/reducers/dataSongsReducer';
 
 const Discovery = () => {
 
-    const { uploadSongs } = useContext(AuthContext);
+    const { uploadSongs, getUserSongs } = useContext(AuthContext);
 
     // upload song
     const [uploadForm, setUploadForm] = useState({
@@ -18,7 +21,12 @@ const Discovery = () => {
         genre: '',
     });
 
+    // redux
+    const dispatch = useDispatch();
+
     const [notificationUpload, setNotificationUpload] = useState((<div></div>));
+
+    const [noTracks, setNoTracks] = useState('');
 
     const { song, title, genre } = uploadForm;
 
@@ -28,6 +36,7 @@ const Discovery = () => {
 
     const onChangeGenreForm = event => setUploadForm({ ...uploadForm, genre: event.target.value });
 
+    // upload
     const upload = async event => {
         event.preventDefault();
         const uploadData = await uploadSongs(uploadForm);
@@ -50,6 +59,35 @@ const Discovery = () => {
         }
     }
 
+    // get user's tracks
+    const userSongs = async () => {
+        const userSongsData = await getUserSongs();
+        if (userSongsData.lenth > 0) {
+            setNoTracks("You have no song. Let's upload your own!");
+        }
+
+        // redux
+        dispatch(changeUserSongs(userSongsData));
+    }
+
+    const playAllUserSongs = async () => {
+        const userSongsData = await getUserSongs();
+
+        // redux
+        dispatch(changeDataSongs(userSongsData));
+    }
+
+    const playThisSong = async index => {
+        const userSongsData = await getUserSongs();
+
+        // redux
+        const thisSong = [userSongsData[index]];
+        dispatch(changeDataSongs(thisSong));
+    }
+
+    const userSongsData = useSelector(userSongsSelector);
+    const listUserSongs = userSongsData.map(song => <div className='btn-user-songs'><Button onClick={playThisSong(userSongsData.indexOf(song))}>{song.title}</Button></div>);
+
     return (
         <>
             <div className='container-discover'>
@@ -67,7 +105,20 @@ const Discovery = () => {
                 </div>
 
                 <div className='discover-content'>
-                    <div className=''></div>
+                    <div className='user-tracks'>
+                        <div className='user-tracks-title'>
+                            <Button variant='success' onClick={userSongs} >Your tracks</Button>
+                        </div>
+                        <div className='user-tracks-list'>
+                            {listUserSongs.length > 0 ? <>
+                                {listUserSongs}
+                                <div>
+                                    <Button onClick={playAllUserSongs}>Play all</Button>
+                                </div>
+                            </> : <h3>{noTracks}</h3>}
+                        </div>
+                    </div>
+
                     <div className='upload-songs'>
                         <div className='upload-songs-title'>Upload your songs</div>
                         <div className='upload-songs-form'>

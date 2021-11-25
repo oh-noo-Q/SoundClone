@@ -195,8 +195,27 @@ const AuthContextProvider = ({ children }) => {
         }
     }
 
+    // get user's songs
+    const getUserSongs = async () => {
+        try {
+            const response = await axios.get(`${apiUrl}/song/getUserSongs`);
+            if (response.data.success) {
+                console.log(response.data);
+                return response.data.songs;
+            }
+        } catch (err) {
+            if (err.response.data) {
+                return err.response.data;
+            }
+            return {
+                success: false,
+                message: err.message,
+            }
+        }
+    }
+
     // context data
-    const authContextData = { loginUser, registerUser, logoutUser, uploadSongs, authState };
+    const authContextData = { loginUser, registerUser, logoutUser, uploadSongs, getUserSongs, authState };
 
     // return provider
     return (

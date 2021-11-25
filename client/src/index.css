@@ -539,13 +539,17 @@ footer {
   text-align: center;
 }
 
+.user-tracks {
+  margin-bottom: 100px;
+}
+
 .upload-songs-form {
   width: 50%;
   margin-left: auto;
   margin-right: auto;
 }
 
-.upload-songs-title {
+.upload-songs-title, .user-tracks-title {
   font-size: xx-large;
   color: tomato;
 }
@@ -562,4 +566,18 @@ footer {
   text-align: center;
   color: red;
   font-size: x-large;
+}
+
+.user-tracks-list {
+  margin-top: 50px;
+}
+
+.btn-user-songs {
+  margin-bottom: 15px;
+}
+
+.btn-user-songs button {
+  width: 500px;
+  background-color: rgb(255, 116, 92);
+  font-weight: bold;
 }

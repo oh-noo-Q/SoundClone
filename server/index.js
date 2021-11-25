@@ -9,6 +9,7 @@ dotenv.config();
 const authRegisterRouter = require('./src/routes/routes.auth.register');
 const authUpdateRouter = require('./src/routes/routes.auth.update');
 
+const getUserSongsRouter = require('./src/routes/routes.song.getUserSongs');
 const getDefaultRouter =require('./src/routes/routes.song.getDefault');
 const searchRouter = require('./src/routes/routes.song.search');
 const upfirebaseRouter = require('./src/routes/routes.song.upfirebase');
@@ -59,6 +60,7 @@ app.use(express.json());
 app.use('/api/auth/register', authRegisterRouter);
 app.use('/api/auth/update', authUpdateRouter);
 
+app.use('/api/song/getUserSongs', getUserSongsRouter);
 app.use('/api/song/getDefault', getDefaultRouter);
 app.use('/api/song/search', searchRouter);
 app.use('/api/song/upfirebase', upfirebaseRouter);

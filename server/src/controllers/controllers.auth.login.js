@@ -58,6 +58,7 @@ controller.loginControllers = async (req, res) => {
             success: true,
             message: 'Login successfully!',
             fullname: user.fullname,
+            username: user.username,
             accessToken,
             refreshToken,
         });
