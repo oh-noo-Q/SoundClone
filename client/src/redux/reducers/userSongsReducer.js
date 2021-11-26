@@ -20,7 +20,7 @@ const userSongsSlice = createSlice({
                 state.userSongs.pop();
             }
             action.payload.forEach(item => {
-                state.userSongs.unshift(item);
+                state.userSongs.push(item);
             });
         },
         removeUserSongs: (state, action) => {

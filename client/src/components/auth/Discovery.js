@@ -62,7 +62,7 @@ const Discovery = () => {
     // get user's tracks
     const userSongs = async () => {
         const userSongsData = await getUserSongs();
-        if (userSongsData.lenth > 0) {
+        if (userSongsData.length === 0) {
             setNoTracks("You have no song. Let's upload your own!");
         }
 
@@ -77,16 +77,21 @@ const Discovery = () => {
         dispatch(changeDataSongs(userSongsData));
     }
 
-    const playThisSong = async index => {
+    const playThisSong = async (index) => {
         const userSongsData = await getUserSongs();
 
         // redux
         const thisSong = [userSongsData[index]];
+        console.log(thisSong);
         dispatch(changeDataSongs(thisSong));
     }
 
     const userSongsData = useSelector(userSongsSelector);
-    const listUserSongs = userSongsData.map(song => <div className='btn-user-songs'><Button onClick={playThisSong(userSongsData.indexOf(song))}>{song.title}</Button></div>);
+    const listUserSongs = userSongsData.map(song => 
+        <div className='btn-user-songs'>
+            <Button onClick={() => playThisSong(userSongsData.indexOf(song))}>{song.title}</Button>
+        </div>
+    );
 
     return (
         <>

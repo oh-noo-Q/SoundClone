@@ -2,8 +2,8 @@ import axios from 'axios';
 import React, { useState } from 'react';
 import { apiUrl } from '../../contexts/Constants';
 import { useDispatch } from 'react-redux';
-import { changeDataSongs } from '../../redux/reducers/dataSongsReducer';
 import { useNavigate } from 'react-router';
+import { changeDataSearch } from '../../redux/reducers/searchDataReducer';
 
 const SearchHome = () => {
 
@@ -46,7 +46,7 @@ const SearchHome = () => {
             const searchData = await searchSongs(searchForm);
 
             // redux
-            dispatch(changeDataSongs(searchData));
+            dispatch(changeDataSearch(searchData));
 
             navigate('/search');
 

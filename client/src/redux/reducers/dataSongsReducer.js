@@ -16,11 +16,11 @@ const dataSongsSlice = createSlice({
     },
     reducers: {
         changeDataSongs: (state, action) => {
-            while (state.dataSongs.length > 0) {
+            while (state.dataSongs.length > 1) {
                 state.dataSongs.pop();
             }
             action.payload.forEach(item => {
-                state.dataSongs.unshift(item);
+                state.dataSongs.push(item);
             });
         }
     }
