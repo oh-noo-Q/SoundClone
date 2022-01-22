@@ -24,7 +24,6 @@ const connectDB = async () => {
             autoIndex: true,
             useNewUrlParser: true,
             useUnifiedTopology: true,
-            // useFindAndModify: false
         });
 
         console.log('mongodb connected!');
@@ -41,16 +40,6 @@ const isProduction = process.env.NODE_ENV === 'production';
 const app = express();
 
 app.use(helmet());
-
-// morgan
-// const accessLogStream = rfs.createStream('access.log', {
-//     interval: '1d',
-//     path: join(__dirname, 'log'),
-// });
-
-// app.use(
-//     isProduction ? morgan('combined', {stream: accessLogStream}) : morgan('dev')
-// );
 
 app.use(morgan('tiny'));
 app.use(cors());
